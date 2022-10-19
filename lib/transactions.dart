@@ -8,7 +8,7 @@ class Transactions extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 5.0),
       child: ListView.builder(
-          itemCount: 20,
+          itemCount: 3,
           itemBuilder: ((context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(
@@ -18,7 +18,7 @@ class Transactions extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Colors.grey[200],
+                  color: Colors.grey[300],
                 ),
                 height: 60,
               ),

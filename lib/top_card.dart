@@ -7,7 +7,7 @@ class TopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 50.0,
+        top: 40.0,
         left: 10,
         right: 10,
         bottom: 10,
@@ -132,7 +132,7 @@ class TopCard extends StatelessWidget {
         ]),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Colors.grey[200],
+            color: Colors.grey[300],
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.shade400,
