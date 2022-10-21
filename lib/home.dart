@@ -117,7 +117,11 @@ class _MyAppState extends State<MyApp> {
           )),
       backgroundColor: Colors.grey[200],
       body: Column(children: [
-        const TopCard(),
+        const TopCard(
+          balance: '500',
+          expense: '250',
+          income: '490',
+        ),
         const Expanded(
           child: Transactions(),
         ),

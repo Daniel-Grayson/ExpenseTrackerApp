@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TopCard extends StatelessWidget {
-  const TopCard({Key? key}) : super(key: key);
+  const TopCard(
+      {Key? key,
+      required this.balance,
+      required this.income,
+      required this.expense})
+      : super(key: key);
+
+  final String balance;
+  final String income;
+  final String expense;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class TopCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Text(
-              '\$ 520.0',
+              '\$ ' + balance,
               style: TextStyle(fontSize: 40, color: Colors.grey[800]),
             ),
           ),
@@ -62,18 +71,18 @@ class TopCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 6.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Expense',
                             style: TextStyle(
                               color: Colors.grey,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 4.0),
+                            padding: const EdgeInsets.only(top: 4.0),
                             child: Text(
-                              '\$ 200.0',
-                              style: TextStyle(
+                              '\$ ' + expense,
+                              style: const TextStyle(
                                 color: Color.fromARGB(255, 121, 120, 120),
                                 fontWeight: FontWeight.bold,
                               ),
@@ -104,18 +113,18 @@ class TopCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 6.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Income',
                             style: TextStyle(
                               color: Colors.grey,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 4.0),
+                            padding: const EdgeInsets.only(top: 4.0),
                             child: Text(
-                              '\$ 500.0',
-                              style: TextStyle(
+                              '\$ ' + income,
+                              style: const TextStyle(
                                 color: Color.fromARGB(255, 121, 120, 120),
                                 fontWeight: FontWeight.bold,
                               ),
