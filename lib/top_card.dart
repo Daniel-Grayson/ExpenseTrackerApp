@@ -54,8 +54,8 @@ class TopCard extends StatelessWidget {
                         width: 40,
                       ),
                       const Icon(
-                        Icons.arrow_upward_rounded,
-                        color: Colors.green,
+                        Icons.arrow_downward_rounded,
+                        color: Colors.red,
                       ),
                     ]),
                     Padding(
@@ -64,7 +64,7 @@ class TopCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            'Income',
+                            'Expense',
                             style: TextStyle(
                               color: Colors.grey,
                             ),
@@ -72,7 +72,7 @@ class TopCard extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 4.0),
                             child: Text(
-                              '\$200.0',
+                              '\$ 200.0',
                               style: TextStyle(
                                 color: Color.fromARGB(255, 121, 120, 120),
                                 fontWeight: FontWeight.bold,
@@ -96,8 +96,8 @@ class TopCard extends StatelessWidget {
                         width: 40,
                       ),
                       const Icon(
-                        Icons.arrow_downward_rounded,
-                        color: Colors.red,
+                        Icons.arrow_upward_rounded,
+                        color: Colors.green,
                       ),
                     ]),
                     Padding(
@@ -106,7 +106,7 @@ class TopCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            'Expense',
+                            'Income',
                             style: TextStyle(
                               color: Colors.grey,
                             ),
@@ -114,7 +114,7 @@ class TopCard extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 4.0),
                             child: Text(
-                              '\$500.0',
+                              '\$ 500.0',
                               style: TextStyle(
                                 color: Color.fromARGB(255, 121, 120, 120),
                                 fontWeight: FontWeight.bold,

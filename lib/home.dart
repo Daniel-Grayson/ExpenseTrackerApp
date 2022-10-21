@@ -11,15 +11,94 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // collect user input
+  bool _isIncome = false;
+
+  // enter new transaction into spreadsheet
+  void _enterTransaction() {
+    _isIncome;
+  }
+
   // new transaction
   void _addTransaction() {
     showDialog(
+        barrierDismissible: false,
         context: context,
-        builder: (context) {
-          return const AlertDialog(
-            title: Text("NEW TRANSACTIONS"),
-            content: Text("Hey, Hello World"),
-          );
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder: (BuildContext context, setState) {
+            return AlertDialog(
+              title: const Center(
+                child: Text("NEW TRANSACTIONS"),
+              ),
+              content: SingleChildScrollView(
+                child: Column(children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text("Expense"),
+                        Switch(
+                          inactiveThumbColor: Colors.red,
+                          activeColor: Colors.green,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _isIncome = value;
+                            });
+                          },
+                          value: _isIncome,
+                        ),
+                        const Text("Income"),
+                      ]),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Amount',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Purpose',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      MaterialButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          color: Colors.black,
+                          child: const Text('Cancel',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ))),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: MaterialButton(
+                            onPressed: () {},
+                            color: Colors.black,
+                            child: const Text(
+                              'Enter',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                ]),
+              ),
+            );
+          });
         });
   }
 
