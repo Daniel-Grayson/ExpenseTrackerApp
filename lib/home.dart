@@ -123,7 +123,11 @@ class _MyAppState extends State<MyApp> {
           income: '490',
         ),
         const Expanded(
-          child: Transactions(),
+          child: Transactions(
+            expenseOrIncome: 'income',
+            money: '5000',
+            transactionName: 'School fees',
+          ),
         ),
         PlusButton(
           function: _addTransaction,
