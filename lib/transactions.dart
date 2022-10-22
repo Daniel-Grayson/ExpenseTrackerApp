@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'google_sheets_api.dart';
+
 class Transactions extends StatelessWidget {
   const Transactions(
       {Key? key,
@@ -15,7 +17,7 @@ class Transactions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(5),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Container(
@@ -27,7 +29,7 @@ class Transactions extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey,
@@ -48,21 +50,28 @@ class Transactions extends StatelessWidget {
                           )),
                     ],
                   ),
-                  Text(
-                    (expenseOrIncome == "expense" ? "-" : "+") + "\$" + money,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: expenseOrIncome == "expense"
-                          ? Colors.red
-                          : Colors.green,
+                  Row(children: [
+                    Text(
+                      (expenseOrIncome == "expense" ? "-" : "+") + "\$" + money,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: expenseOrIncome == "expense"
+                            ? Colors.red
+                            : Colors.green,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ))
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: IconButton(
+                          onPressed: () {
+                            GoogleSheetsApi.currentTransactions.length - 1;
+                          },
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          )),
+                    ),
+                  ])
                 ]),
           ),
         ));

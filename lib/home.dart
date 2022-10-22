@@ -322,6 +322,30 @@ class _HomePageState extends State<MyApp> {
               income: GoogleSheetsApi.calculateIncome().toString(),
               expense: GoogleSheetsApi.calculateExpense().toString(),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Transaction Name',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      )),
+                  MaterialButton(
+                    onPressed: () {},
+                    child: const Text('Clear All',
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Center(
                 child: Column(
