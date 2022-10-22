@@ -38,7 +38,10 @@ class TopCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Text(
               '\$ ' + balance,
-              style: TextStyle(fontSize: 40, color: Colors.grey[800]),
+              style: TextStyle(
+                fontSize: 40,
+                color: Colors.grey[800],
+              ),
             ),
           ),
           Padding(

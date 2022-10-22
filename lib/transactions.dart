@@ -15,19 +15,19 @@ class Transactions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Container(
-            padding: const EdgeInsets.all(20),
-            color: Colors.grey[300],
+            padding: const EdgeInsets.all(15),
+            color: Colors.white,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(2),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey,
@@ -56,7 +56,13 @@ class Transactions extends StatelessWidget {
                           ? Colors.red
                           : Colors.green,
                     ),
-                  )
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ))
                 ]),
           ),
         ));
