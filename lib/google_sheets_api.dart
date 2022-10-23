@@ -117,4 +117,13 @@ class GoogleSheetsApi {
     }
     return totalExpense;
   }
+
+  static Future<bool> deleteById(int id) async {
+    if (_worksheet == null) return false;
+
+    final index = await _worksheet!.values.rowIndexOf(id);
+    if (index == -1) return false;
+
+    return _worksheet!.deleteRow(index);
+  }
 }

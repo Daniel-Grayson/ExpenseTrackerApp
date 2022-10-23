@@ -250,7 +250,7 @@ class _HomePageState extends State<MyApp> {
                                       .currentTransactions[index][1],
                                   expenseOrIncome: GoogleSheetsApi
                                       .currentTransactions[index][2],
-                                  onClicked: () => removeItem(index),
+                                  // onClicked: () => removeItem(index),
                                 );
                               }),
                     )
@@ -268,9 +268,9 @@ class _HomePageState extends State<MyApp> {
   }
 }
 
-void removeItem(int index) {
-  GoogleSheetsApi.currentTransactions.removeAt(index);
+// void removeItem(int index) {
+//   GoogleSheetsApi.currentTransactions.removeAt(index);
 
-// var listKey;
-  // listKey.currentState!.removeItem(index, );
-}
+// // var listKey;
+//   // listKey.currentState!.removeItem(index, );
+// }
