@@ -1,142 +1,3 @@
-// import 'package:expense_tracker_app/plus_button.dart';
-// import 'package:expense_tracker_app/top_card.dart';
-// import 'package:expense_tracker_app/transactions.dart';
-// import 'package:flutter/material.dart';
-
-// class MyApp extends StatefulWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   State<MyApp> createState() => _MyAppState();
-// }
-
-// class _MyAppState extends State<MyApp> {
-//   // collect user input
-//   bool _isIncome = false;
-
-//   // enter new transaction into spreadsheet
-//   void _enterTransaction() {
-//     _isIncome;
-//   }
-
-//   // new transaction
-//   void _addTransaction() {
-//     showDialog(
-//         barrierDismissible: false,
-//         context: context,
-//         builder: (BuildContext context) {
-//           return StatefulBuilder(builder: (BuildContext context, setState) {
-//             return AlertDialog(
-//               title: const Center(
-//                 child: Text("NEW TRANSACTIONS"),
-//               ),
-//               content: SingleChildScrollView(
-//                 child: Column(children: [
-//                   Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                       children: [
-//                         const Text("Expense"),
-//                         Switch(
-//                           inactiveThumbColor: Colors.red,
-//                           activeColor: Colors.green,
-//                           onChanged: (bool value) {
-//                             setState(() {
-//                               _isIncome = value;
-//                             });
-//                           },
-//                           value: _isIncome,
-//                         ),
-//                         const Text("Income"),
-//                       ]),
-//                   const SizedBox(
-//                     height: 20,
-//                   ),
-//                   TextFormField(
-//                     decoration: const InputDecoration(
-//                       border: OutlineInputBorder(),
-//                       hintText: 'Amount',
-//                     ),
-//                   ),
-//                   const SizedBox(
-//                     height: 10,
-//                   ),
-//                   TextFormField(
-//                     decoration: const InputDecoration(
-//                       border: OutlineInputBorder(),
-//                       hintText: 'Purpose',
-//                     ),
-//                   ),
-//                   const SizedBox(
-//                     height: 10,
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.end,
-//                     children: [
-//                       MaterialButton(
-//                           onPressed: () {
-//                             Navigator.of(context).pop();
-//                           },
-//                           color: Colors.black,
-//                           child: const Text('Cancel',
-//                               style: TextStyle(
-//                                 color: Colors.white,
-//                               ))),
-//                       Padding(
-//                         padding: const EdgeInsets.only(left: 10.0),
-//                         child: MaterialButton(
-//                             onPressed: () {},
-//                             color: Colors.black,
-//                             child: const Text(
-//                               'Enter',
-//                               style: TextStyle(
-//                                 color: Colors.white,
-//                               ),
-//                             )),
-//                       ),
-//                     ],
-//                   ),
-//                 ]),
-//               ),
-//             );
-//           });
-//         });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//           backgroundColor: Colors.grey[300],
-//           centerTitle: true,
-//           title: const Text(
-//             "EXPENSE TRACKER",
-//             style: TextStyle(
-//               fontSize: 18,
-//               color: Colors.grey,
-//             ),
-//           )),
-//       backgroundColor: Colors.grey[200],
-//       body: Column(children: [
-//         const TopCard(
-//           balance: '500',
-//           expense: '250',
-//           income: '490',
-//         ),
-//         const Expanded(
-//           child: Transactions(
-//             expenseOrIncome: 'income',
-//             money: '5000',
-//             transactionName: 'School fees',
-//           ),
-//         ),
-//         PlusButton(
-//           function: _addTransaction,
-//         ),
-//       ]),
-//     );
-//   }
-// }
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'google_sheets_api.dart';
@@ -153,10 +14,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _HomePageState extends State<MyApp> {
+  final listKey = GlobalKey();
   // collect user input
   final _textcontrollerAMOUNT = TextEditingController();
   final _textcontrollerITEM = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _purposeKey = GlobalKey<FormState>();
   bool _isIncome = false;
 
   // enter the new transaction into the spreadsheet
@@ -208,12 +71,21 @@ class _HomePageState extends State<MyApp> {
                       Row(
                         children: [
                           Expanded(
-                            child: TextField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'Purpose',
+                            child: Form(
+                              key: _purposeKey,
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Purpose',
+                                ),
+                                validator: (purpose) {
+                                  if (purpose == null || purpose.isEmpty) {
+                                    return 'Field cannot be empty';
+                                  }
+                                  return null;
+                                },
+                                controller: _textcontrollerITEM,
                               ),
-                              controller: _textcontrollerITEM,
                             ),
                           ),
                         ],
@@ -264,7 +136,8 @@ class _HomePageState extends State<MyApp> {
                           color: Colors.white,
                         )),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate() &&
+                          _purposeKey.currentState!.validate()) {
                         _enterTransaction();
                         Navigator.of(context).pop();
                       }
@@ -336,7 +209,16 @@ class _HomePageState extends State<MyApp> {
                         fontWeight: FontWeight.w500,
                       )),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        // GoogleSheetsApi.currentTransactions.removeAt(
+                        //   GoogleSheetsApi.currentTransactions[index]
+                        // );
+
+                        // balance = 0.0;
+                        // check calculator logic to initialize balance, income and expenses to null on pressed
+                      });
+                    },
                     child: const Text('Clear All',
                         style: TextStyle(
                           color: Colors.white,
@@ -357,6 +239,7 @@ class _HomePageState extends State<MyApp> {
                       child: GoogleSheetsApi.loading == true
                           ? const LoadingCircle()
                           : ListView.builder(
+                              key: listKey,
                               itemCount:
                                   GoogleSheetsApi.currentTransactions.length,
                               itemBuilder: (context, index) {
@@ -367,6 +250,7 @@ class _HomePageState extends State<MyApp> {
                                       .currentTransactions[index][1],
                                   expenseOrIncome: GoogleSheetsApi
                                       .currentTransactions[index][2],
+                                  onClicked: () => removeItem(index),
                                 );
                               }),
                     )
@@ -382,4 +266,11 @@ class _HomePageState extends State<MyApp> {
       ),
     );
   }
+}
+
+void removeItem(int index) {
+  GoogleSheetsApi.currentTransactions.removeAt(index);
+
+// var listKey;
+  // listKey.currentState!.removeItem(index, );
 }

@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'google_sheets_api.dart';
-
-class Transactions extends StatelessWidget {
+class Transactions extends StatefulWidget {
   const Transactions(
       {Key? key,
       required this.transactionName,
       required this.expenseOrIncome,
-      required this.money})
+      required this.money,
+      required this.onClicked})
       : super(key: key);
 
   final String transactionName;
   final String expenseOrIncome;
   final String money;
+  final VoidCallback? onClicked;
 
+  @override
+  State<Transactions> createState() => _TransactionsState();
+}
+
+class _TransactionsState extends State<Transactions> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,7 +48,7 @@ class Transactions extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text(transactionName,
+                      Text(widget.transactionName,
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black,
@@ -52,10 +57,12 @@ class Transactions extends StatelessWidget {
                   ),
                   Row(children: [
                     Text(
-                      (expenseOrIncome == "expense" ? "-" : "+") + "\$" + money,
+                      (widget.expenseOrIncome == "expense" ? "-" : "+") +
+                          "\$" +
+                          widget.money,
                       style: TextStyle(
                         fontSize: 16,
-                        color: expenseOrIncome == "expense"
+                        color: widget.expenseOrIncome == "expense"
                             ? Colors.red
                             : Colors.green,
                       ),
@@ -63,9 +70,7 @@ class Transactions extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: IconButton(
-                          onPressed: () {
-                            GoogleSheetsApi.currentTransactions.length - 1;
-                          },
+                          onPressed: widget.onClicked,
                           icon: const Icon(
                             Icons.delete,
                             color: Colors.red,
